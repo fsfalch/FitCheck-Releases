@@ -1,0 +1,41 @@
+name: Publish FitCheck 1.4.1 APK
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'publish/trigger-141.txt'
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download signed FitCheck 1.4.1 artifact
+        run: |
+          curl -fL 'https://sdmntprbrazilsouth.oaiusercontent.com/files/00000000-9f58-820e-9b73-4183ea84d36f/raw?se=2026-10-02T21%3A04%3A24Z&sp=r&sv=2026-02-06&sr=b&scid=48c7e3ee-6615-5d3f-b8e1-e1c5280d4e33&skoid=bdd24bd8-9af5-4138-bfb1-19fba97a8611&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-10-02T19%3A49%3A17Z&ske=2026-10-03T19%3A49%3A17Z&sks=b&skv=2026-02-06&sig=UbtHX5r66sSXp8SJ%2BfMPe%2BSJNP17TSbXzlxATMcan3w%3D' -o artifact.zip
+          echo '0a87033af2479369c345606478d860370d225b8c8a24c75cd62a45eaec152fee  artifact.zip' | sha256sum -c -
+          unzip -q artifact.zip -d artifact
+          test -s artifact/FitCheck-1.4.1.apk
+          echo 'bc83b161be3b104bf0a1d89cf9ba1c09ab78734163ae4c38bf657108c46b8ab7  artifact/FitCheck-1.4.1.apk' | sha256sum -c -
+
+      - name: Publish APK into releases directory
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 - <<'PY'
+          import base64, json, pathlib
+          apk = pathlib.Path('artifact/FitCheck-1.4.1.apk').read_bytes()
+          payload = {
+              'message': 'Publish FitCheck 1.4.1 OTA APK',
+              'content': base64.b64encode(apk).decode(),
+              'branch': 'main'
+          }
+          pathlib.Path('payload.json').write_text(json.dumps(payload))
+          PY
+          gh api --method PUT /repos/${{ github.repository }}/contents/releases/FitCheck-1.4.1.apk --input payload.json
