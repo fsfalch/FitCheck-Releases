@@ -1,8 +1,8 @@
 {
-  "versionCode": 5,
-  "versionName": "1.2.1",
-  "apkUrl": "https://raw.githubusercontent.com/fsfalch/FitCheck-Releases/main/releases/FitCheck-1.2.1.apk",
-  "sha256": "33fc08d2a1f8db10aee04dcb50d32df3213e910e1e1e4be49a01d7e05a58fb0f",
-  "notes": "FitCheck 1.2.1 — canal OTA ativo, verificação de versão dentro do app, download seguro com validação SHA-256 e instalação pelo Android.",
+  "versionCode": 6,
+  "versionName": "1.2.2",
+  "apkUrl": "https://raw.githubusercontent.com/fsfalch/FitCheck-Releases/main/releases/FitCheck-1.2.2.apk",
+  "sha256": "911371feef5d8884d72ac170346e03fb8ae1c19090f3536fdc63964aa88b746e",
+  "notes": "FitCheck 1.2.2 — atualização de teste do OTA com nova apresentação na área Desenvolvedor. Nenhuma outra mudança funcional.",
   "mandatory": false
 }
