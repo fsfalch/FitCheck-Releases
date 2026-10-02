@@ -1,8 +1,8 @@
 {
-  "versionCode": 6,
-  "versionName": "1.2.2",
-  "apkUrl": "https://raw.githubusercontent.com/fsfalch/FitCheck-Releases/main/releases/FitCheck-1.2.2.apk",
-  "sha256": "911371feef5d8884d72ac170346e03fb8ae1c19090f3536fdc63964aa88b746e",
-  "notes": "FitCheck 1.2.2 — atualização de teste do OTA com nova apresentação na área Desenvolvedor. Nenhuma outra mudança funcional.",
+  "versionCode": 7,
+  "versionName": "1.3.0",
+  "apkUrl": "https://raw.githubusercontent.com/fsfalch/FitCheck-Releases/main/releases/FitCheck-1.3.0.apk",
+  "sha256": "1c6ad8717777b68db016edbc2a439a8d6ea80f4e795b7ad275f688e6f3f04752",
+  "notes": "FitCheck 1.3.0 — onboarding com configuração inicial de metas, lembretes mais inteligentes e variados, aviso de minutos restantes, check-in pela notificação, celebrações e verificação automática de atualizações.",
   "mandatory": false
 }
