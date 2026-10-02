@@ -1,8 +1,8 @@
 {
-  "versionCode": 9,
-  "versionName": "1.4.1",
-  "apkUrl": "https://raw.githubusercontent.com/fsfalch/FitCheck-Releases/main/releases/FitCheck-1.4.1.apk",
-  "sha256": "bc83b161be3b104bf0a1d89cf9ba1c09ab78734163ae4c38bf657108c46b8ab7",
-  "notes": "FitCheck 1.4.1 — hotfix da área Minha evolução: a tela Progresso agora exibe comparativos semanais e mensais, média por dia ativo, distribuição por modalidade, recordes, padrões de treino e meta semanal em minutos.",
+  "versionCode": 10,
+  "versionName": "1.4.2",
+  "apkUrl": "https://raw.githubusercontent.com/fsfalch/FitCheck-Releases/main/releases/FitCheck-1.4.2.apk",
+  "sha256": "935567738824be67a4e4713c3810cf9a4d3f401ad23cd447d9e7c0f45b50402a",
+  "notes": "FitCheck 1.4.2 — correção da média geral por dia ativo. O indicador do topo em Minha evolução agora considera todo o histórico de dias com atividade, inclusive em viradas de mês. Nenhuma outra alteração funcional nesta versão.",
   "mandatory": false
 }
