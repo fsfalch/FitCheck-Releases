@@ -1,8 +1,8 @@
 {
-  "versionCode": 7,
-  "versionName": "1.3.0",
-  "apkUrl": "https://raw.githubusercontent.com/fsfalch/FitCheck-Releases/main/releases/FitCheck-1.3.0.apk",
-  "sha256": "1c6ad8717777b68db016edbc2a439a8d6ea80f4e795b7ad275f688e6f3f04752",
-  "notes": "FitCheck 1.3.0 — onboarding com configuração inicial de metas, lembretes mais inteligentes e variados, aviso de minutos restantes, check-in pela notificação, celebrações e verificação automática de atualizações.",
+  "versionCode": 8,
+  "versionName": "1.4.0",
+  "apkUrl": "https://raw.githubusercontent.com/fsfalch/FitCheck-Releases/main/releases/FitCheck-1.4.0.apk",
+  "sha256": "4889b66626193ef067aebff5903f337b8332ad173f1dcb6a79e7423aaaddd617",
+  "notes": "FitCheck 1.4.0 — nova área Minha evolução com comparativos semanais e mensais, média por dia ativo, distribuição por modalidade, recordes, padrões de treino, meta semanal por minutos, histórico filtrável, changelog e diagnóstico.",
   "mandatory": false
 }
