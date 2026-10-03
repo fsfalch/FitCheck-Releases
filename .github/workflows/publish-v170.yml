@@ -1,0 +1,67 @@
+name: Publish FitCheck 1.7.0 OTA
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'publish/trigger-170.txt'
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download signed FitCheck 1.7.0 artifact
+        run: |
+          curl -fL 'https://sdmntprbrazilsouth.oaiusercontent.com/files/00000000-e924-820e-9ffb-55049ac218bc/raw?se=2026-10-03T21%3A39%3A30Z&sp=r&sv=2026-02-06&sr=b&scid=aabfd6af-0670-5816-9a7a-dc0e44814a02&skoid=bdd24bd8-9af5-4138-bfb1-19fba97a8611&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-10-03T18%3A48%3A58Z&ske=2026-10-04T18%3A48%3A58Z&sks=b&skv=2026-02-06&sig=yOUikCC/4iEPm1LcdHhrHJ0rKGPcsa%2BzR8aJ7uJCD74%3D' -o artifact.zip
+          echo '6562f944c626e7a8a032e37392d8b6304a8c3910ac5c898a99056d937a8e4e82  artifact.zip' | sha256sum -c -
+          unzip -q artifact.zip -d artifact
+          test -s artifact/FitCheck-1.7.0.apk
+          echo 'b550a50d554b135a2db7af580e095d7a6823d260657293120106e7d279185804  artifact/FitCheck-1.7.0.apk' | sha256sum -c -
+
+      - name: Publish APK
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 - <<'PY'
+          import base64, json, pathlib
+          apk = pathlib.Path('artifact/FitCheck-1.7.0.apk').read_bytes()
+          payload = {
+              'message': 'Publish FitCheck 1.7.0 OTA APK',
+              'content': base64.b64encode(apk).decode(),
+              'branch': 'main'
+          }
+          pathlib.Path('apk-payload.json').write_text(json.dumps(payload))
+          PY
+          gh api --method PUT /repos/${{ github.repository }}/contents/releases/FitCheck-1.7.0.apk --input apk-payload.json
+
+      - name: Publish OTA manifest
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          SHA=$(gh api /repos/${{ github.repository }}/contents/update.json --jq .sha)
+          python3 - <<'PY'
+          import base64, json, pathlib
+          manifest = '''{
+            "versionCode": 14,
+            "versionName": "1.7.0",
+            "apkUrl": "https://raw.githubusercontent.com/fsfalch/FitCheck-Releases/main/releases/FitCheck-1.7.0.apk",
+            "sha256": "b550a50d554b135a2db7af580e095d7a6823d260657293120106e7d279185804",
+            "notes": "FitCheck 1.7.0 — Smart Reminders: som próprio do FitCheck, vibração configurável, modos silencioso/vibração/som/som + vibração e teste de alerta direto nos Ajustes.",
+            "mandatory": false
+          }\n'''
+          payload = {
+              'message': 'Point OTA channel to FitCheck 1.7.0',
+              'content': base64.b64encode(manifest.encode()).decode(),
+              'branch': 'main',
+              'sha': '__SHA__'
+          }
+          pathlib.Path('manifest-payload.json').write_text(json.dumps(payload))
+          PY
+          sed -i "s/__SHA__/$SHA/" manifest-payload.json
+          gh api --method PUT /repos/${{ github.repository }}/contents/update.json --input manifest-payload.json
