@@ -18,8 +18,8 @@ jobs:
 
       - name: Download signed FitCheck 1.9.1 artifact
         run: |
-          curl -fL 'https://sdmntprbrazilsouth.oaiusercontent.com/files/00000000-73ec-820e-8f6d-07698f2dddcf/raw?se=2026-10-07T20%3A03%3A06Z&sp=r&sv=2026-02-06&sr=b&scid=4940f581-5c3a-53f9-8d56-aba5a159d143&skoid=bdd24bd8-9af5-4138-bfb1-19fba97a8611&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-10-07T12%3A29%3A35Z&ske=2026-10-08T12%3A29%3A35Z&sks=b&skv=2026-02-06&sig=9Q%2BuIVAd2qgFtDYmg7O3FmKajsrcVSjQ7PP3HAdir1Y%3D' -o artifact.zip
-          echo '270acd91a545f8d2dc22f69ec7165fff810ddc9d7f67e5ea2564a20515776b2b  artifact.zip' | sha256sum -c -
+          curl -fL 'https://sdmntprbrazilsouth.oaiusercontent.com/files/00000000-054c-820e-9eef-e00712c18eb1/raw?se=2026-10-07T20%3A13%3A36Z&sp=r&sv=2026-02-06&sr=b&scid=0d8ef1c7-89b6-5b4a-b885-efc3da938da3&skoid=bdd24bd8-9af5-4138-bfb1-19fba97a8611&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-10-07T12%3A29%3A35Z&ske=2026-10-08T12%3A29%3A35Z&sks=b&skv=2026-02-06&sig=xxPn/FNYILu7ybA%2BuTaSAqhatbgsXg2oHuvVudIHtBg%3D' -o artifact.zip
+          echo '6516840d16cf67280e617cd0b41228fbf4ec2a5f826c43b7597585182750578b  artifact.zip' | sha256sum -c -
           unzip -q artifact.zip -d artifact
           test -s artifact/FitCheck-1.9.1.apk
           echo 'fbf7fd3142c726ad7154dbc1c0751902d4e247c6e59b9fcd04cc1f9103435132  artifact/FitCheck-1.9.1.apk' | sha256sum -c -
