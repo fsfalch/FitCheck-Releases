@@ -1,8 +1,8 @@
 {
-  "versionCode": 14,
-  "versionName": "1.7.0",
-  "apkUrl": "https://raw.githubusercontent.com/fsfalch/FitCheck-Releases/main/releases/FitCheck-1.7.0.apk",
-  "sha256": "b550a50d554b135a2db7af580e095d7a6823d260657293120106e7d279185804",
-  "notes": "FitCheck 1.7.0 — Smart Reminders: som próprio do FitCheck, vibração configurável, modos silencioso/vibração/som/som + vibração e teste de alerta direto nos Ajustes.",
+  "versionCode": 15,
+  "versionName": "1.8.0",
+  "apkUrl": "https://raw.githubusercontent.com/fsfalch/FitCheck-Releases/main/releases/FitCheck-1.8.0.apk",
+  "sha256": "a6ab3d94731716b6ca132e1fa4fd5100d77a2c75f771b98b691bf752a9ee9325",
+  "notes": "FitCheck 1.8.0 — Temas e Widgets: aparência Automático/Claro/Escuro e novos widgets para acesso rápido ao resumo de hoje, sequência e progresso semanal.",
   "mandatory": false
 }
