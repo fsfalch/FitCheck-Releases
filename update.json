@@ -1,8 +1,8 @@
 {
-  "versionCode": 17,
-  "versionName": "1.9.0",
-  "apkUrl": "https://raw.githubusercontent.com/fsfalch/FitCheck-Releases/main/releases/FitCheck-1.9.0.apk",
-  "sha256": "66976c407b665fda794c4e9d92a51dff830758e9f543f589f8ce0f1e0fea52aa",
-  "notes": "FitCheck 1.9.0 — Outdoor + GPS: caminhada, corrida e bike com registro de percurso, tempo, distância, ritmo/velocidade e contexto opcional, mantendo o registro manual.",
+  "versionCode": 18,
+  "versionName": "1.9.1",
+  "apkUrl": "https://raw.githubusercontent.com/fsfalch/FitCheck-Releases/main/releases/FitCheck-1.9.1.apk",
+  "sha256": "fbf7fd3142c726ad7154dbc1c0751902d4e247c6e59b9fcd04cc1f9103435132",
+  "notes": "FitCheck 1.9.1 — Mapa & Detalhes GPS: mapa real do percurso nas atividades outdoor e nova tela de detalhes com rota, distância, tempo, ritmo/velocidade e contexto.",
   "mandatory": false
 }
