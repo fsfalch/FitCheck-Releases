@@ -1,8 +1,8 @@
 {
-  "versionCode": 15,
-  "versionName": "1.8.0",
-  "apkUrl": "https://raw.githubusercontent.com/fsfalch/FitCheck-Releases/main/releases/FitCheck-1.8.0.apk",
-  "sha256": "a6ab3d94731716b6ca132e1fa4fd5100d77a2c75f771b98b691bf752a9ee9325",
-  "notes": "FitCheck 1.8.0 — Temas e Widgets: aparência Automático/Claro/Escuro e novos widgets para acesso rápido ao resumo de hoje, sequência e progresso semanal.",
+  "versionCode": 16,
+  "versionName": "1.8.1",
+  "apkUrl": "https://raw.githubusercontent.com/fsfalch/FitCheck-Releases/main/releases/FitCheck-1.8.1.apk",
+  "sha256": "8e7156afddc09c4658d78ce06e4a2d0e54eae52a4631382ae58152afeeb2dd78",
+  "notes": "FitCheck 1.8.1 — Polimento: troca de tema preserva a aba atual e o detalhe da atividade abre já alinhado, sem deslocamento visual.",
   "mandatory": false
 }
