@@ -1,8 +1,8 @@
 {
-  "versionCode": 19,
-  "versionName": "1.9.2",
-  "apkUrl": "https://raw.githubusercontent.com/fsfalch/FitCheck-Releases/main/releases/FitCheck-1.9.2.apk",
-  "sha256": "aac0cd3bf37554a011968d56f0f08ed27c76d5e642e8e42cf478424c31114897",
-  "notes": "FitCheck 1.9.2 — Histórico aprimorado: novo big number de dias ativos no mês, minutos acumulados e frequência mensal diretamente no calendário.",
+  "versionCode": 20,
+  "versionName": "1.9.3",
+  "apkUrl": "https://raw.githubusercontent.com/fsfalch/FitCheck-Releases/main/releases/FitCheck-1.9.3.apk",
+  "sha256": "3728692098cf50854c5a39b93bd8992f61561316c4df5ad714e2a7d8015364e8",
+  "notes": "FitCheck 1.9.3 — Hotfix: Novidades da versão agora acompanha automaticamente a versão instalada; título e informações de release corrigidos.",
   "mandatory": false
 }
