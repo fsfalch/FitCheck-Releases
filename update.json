@@ -1,8 +1,8 @@
 {
-  "versionCode": 18,
-  "versionName": "1.9.1",
-  "apkUrl": "https://raw.githubusercontent.com/fsfalch/FitCheck-Releases/main/releases/FitCheck-1.9.1.apk",
-  "sha256": "fbf7fd3142c726ad7154dbc1c0751902d4e247c6e59b9fcd04cc1f9103435132",
-  "notes": "FitCheck 1.9.1 — Mapa & Detalhes GPS: mapa real do percurso nas atividades outdoor e nova tela de detalhes com rota, distância, tempo, ritmo/velocidade e contexto.",
+  "versionCode": 19,
+  "versionName": "1.9.2",
+  "apkUrl": "https://raw.githubusercontent.com/fsfalch/FitCheck-Releases/main/releases/FitCheck-1.9.2.apk",
+  "sha256": "aac0cd3bf37554a011968d56f0f08ed27c76d5e642e8e42cf478424c31114897",
+  "notes": "FitCheck 1.9.2 — Histórico aprimorado: novo big number de dias ativos no mês, minutos acumulados e frequência mensal diretamente no calendário.",
   "mandatory": false
 }
