@@ -1,11 +1,21 @@
-# FitCheck Releases
+# FitCheck — releases oficiais
 
-Canal público oficial de distribuição e atualização OTA do FitCheck.
+Canal **público** de APKs e atualização OTA do **FitCheck** (F. Labs). O código-fonte principal e os materiais de assinatura permanecem no repositório **privado** de desenvolvimento.
 
-Este repositório contém apenas artefatos de distribuição, manifesto de atualização e notas de versão. O código-fonte principal do FitCheck permanece privado.
+## Versão disponível no manifesto
 
-## Canal OTA
+**FitCheck 1.9.3 — versionCode 20**, verificado em **05/11/2026**.
 
-O aplicativo consulta `update.json` por HTTPS para verificar a versão mais recente. Quando houver uma versão superior à instalada, o FitCheck poderá baixar o APK, validar o SHA-256 e encaminhar a instalação ao instalador oficial do Android.
+- [Manifesto ativo: update.json](update.json)
+- [APK público: FitCheck-1.9.3.apk](releases/FitCheck-1.9.3.apk)
+- Correção principal: a tela **Novidades da versão** agora acompanha a versão instalada, com título e informações atualizados.
 
-Versão publicada no manifesto: **1.2.1** (`versionCode 5`).
+O aplicativo consulta o manifesto por HTTPS, compara `versionCode`, valida integridade SHA-256 e encaminha a instalação ao mecanismo oficial do Android. **OTA publicada não significa homologação funcional ou de segurança concluída em aparelho.**
+
+### Histórico
+
+Versões e artefatos anteriores permanecem rastreáveis em [releases/](releases/) e [release-notes/](release-notes/). A versão no `update.json` prevalece como referência de **canal atual**, ainda que documentos antigos mencionem versões anteriores.
+
+Não armazenar código-fonte privado, tokens, certificados privados, keystores, senhas ou dados pessoais neste repositório público.
+
+© F. Labs.
