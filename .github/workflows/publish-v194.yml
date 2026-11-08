@@ -1,0 +1,97 @@
+name: Publish FitCheck 1.9.4 OTA (official signed APK)
+on:
+  push:
+    branches: [main]
+    paths: ['publish/trigger-194.txt']
+permissions:
+  contents: write
+concurrency:
+  group: fitcheck-ota-production
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate signed release bundle and current channel
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json,hashlib,urllib.request,pathlib,zipfile,re
+          cfg=json.load(open('publish/source-194.json'))
+          current=json.load(open('update.json'))
+          if (current['versionCode'],current['versionName'])!=(20,'1.9.3'):
+              raise SystemExit('Production changed; do not overwrite current OTA')
+          url=cfg['url']
+          if not url.startswith('https://') or any(c in url for c in '\r\n'):
+              raise SystemExit('Invalid HTTPS artifact URL')
+          if not re.fullmatch('[a-f0-9]{64}',cfg['zip_sha256']) or not re.fullmatch('[a-f0-9]{64}',cfg['apk_sha256']):
+              raise SystemExit('Invalid pinned release checksums')
+          with urllib.request.urlopen(url,timeout=55) as response:
+              data=response.read(30*1024*1024)
+          if hashlib.sha256(data).hexdigest()!=cfg['zip_sha256']:raise SystemExit('Artifact ZIP hash mismatch')
+          pathlib.Path('signed-artifact.zip').write_bytes(data)
+          with zipfile.ZipFile('signed-artifact.zip') as z:
+              names=[s for s in z.namelist() if s.endswith('FitCheck-1.9.4.apk')]
+              if len(names)!=1:raise SystemExit('Exactly one signed APK required')
+              apk=z.read(names[0])
+          if hashlib.sha256(apk).hexdigest()!=cfg['apk_sha256']:raise SystemExit('Signed APK hash mismatch')
+          if len(apk)<100000:raise SystemExit('APK truncated')
+          pathlib.Path('FitCheck-1.9.4.apk').write_bytes(apk)
+          print('FITCHECK_194_PINNED_ARTIFACT_AND_APK_SHA256_OK')
+          PY
+          AAPT="$(find "${ANDROID_HOME}/build-tools" -type f -name aapt | sort -V | tail -1)"
+          SIGNER="$(find "${ANDROID_HOME}/build-tools" -type f -name apksigner | sort -V | tail -1)"
+          test -x "$AAPT" && test -x "$SIGNER"
+          "$AAPT" dump badging FitCheck-1.9.4.apk | grep "package: name='com.fitcheck.daily' versionCode='21' versionName='1.9.4'"
+          "$SIGNER" verify --print-certs FitCheck-1.9.4.apk > signer-verification.txt
+          grep -qi '7524d2e36fdaf8819a1ce1be7de479fd6df0b7afea42136decae16a5b2a0a743' signer-verification.txt
+          echo 'FITCHECK_194_PRODUCTION_SIGNATURE_AND_METADATA_OK'
+      - name: Publish immutable signed APK
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import base64,json,pathlib
+          apk=pathlib.Path('FitCheck-1.9.4.apk').read_bytes()
+          pathlib.Path('publish-apk.json').write_text(json.dumps({
+            'message':'Release FitCheck 1.9.4 officially signed APK',
+            'content':base64.b64encode(apk).decode(),
+            'branch':'main'
+          }))
+          PY
+          gh api --method PUT /repos/${{ github.repository }}/contents/releases/FitCheck-1.9.4.apk --input publish-apk.json > result-apk.json
+          echo 'FITCHECK_194_SIGNED_APK_PUBLIC'
+      - name: Publish OTA manifest after APK upload
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json,base64,pathlib,subprocess,os
+          cfg=json.load(open('publish/source-194.json'))
+          new={
+            'versionCode':21, 'versionName':'1.9.4',
+            'apkUrl':'https://raw.githubusercontent.com/fsfalch/FitCheck-Releases/main/releases/FitCheck-1.9.4.apk',
+            'sha256':cfg['apk_sha256'],
+            'notes':'FitCheck 1.9.4 — Nova identidade visual F. Labs: ícone, splash, paleta e telas claro/escuro; widgets atualizados e melhoria na visualização de rotas offline. Homologação no aparelho em andamento.',
+            'mandatory':False
+          }
+          sha=subprocess.check_output(['gh','api','/repos/'+os.environ['GITHUB_REPOSITORY']+'/contents/update.json','--jq','.sha'],text=True).strip()
+          pathlib.Path('publish-manifest.json').write_text(json.dumps({
+            'message':'Publish FitCheck 1.9.4 public OTA channel',
+            'content':base64.b64encode((json.dumps(new,ensure_ascii=False,indent=2)+'\n').encode()).decode(),
+            'branch':'main','sha':sha
+          }))
+          PY
+          gh api --method PUT /repos/${{ github.repository }}/contents/update.json --input publish-manifest.json > result-manifest.json
+          gh api /repos/${{ github.repository }}/contents/update.json --jq .content | tr -d '\n' | base64 -d | tee published.json
+          python3 - <<'PY'
+          import json
+          d=json.load(open('published.json')); cfg=json.load(open('publish/source-194.json'))
+          assert d['versionCode']==21 and d['versionName']=='1.9.4' and d['sha256']==cfg['apk_sha256']
+          print('FITCHECK_194_PUBLIC_OTA_MANIFEST_CONFIRMED')
+          PY
