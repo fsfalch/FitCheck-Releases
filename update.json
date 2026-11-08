@@ -1,8 +1,8 @@
 {
-  "versionCode": 20,
-  "versionName": "1.9.3",
-  "apkUrl": "https://raw.githubusercontent.com/fsfalch/FitCheck-Releases/main/releases/FitCheck-1.9.3.apk",
-  "sha256": "3728692098cf50854c5a39b93bd8992f61561316c4df5ad714e2a7d8015364e8",
-  "notes": "FitCheck 1.9.3 — Hotfix: Novidades da versão agora acompanha automaticamente a versão instalada; título e informações de release corrigidos.",
+  "versionCode": 21,
+  "versionName": "1.9.4",
+  "apkUrl": "https://raw.githubusercontent.com/fsfalch/FitCheck-Releases/main/releases/FitCheck-1.9.4.apk",
+  "sha256": "fb27b18ac8c08d72629b889b1576d10b2e2a3f5b3cdef7920ee4c6b09f5fcda0",
+  "notes": "FitCheck 1.9.4 — Nova identidade visual F. Labs: ícone, splash, paleta e telas claro/escuro; widgets atualizados e melhoria na visualização de rotas offline. Homologação no aparelho em andamento.",
   "mandatory": false
 }
