@@ -1,0 +1,1 @@
+Publish FitCheck 1.9.4 / versionCode21 with verified permanent certificate and SHA256. Date 2026-11-08.
